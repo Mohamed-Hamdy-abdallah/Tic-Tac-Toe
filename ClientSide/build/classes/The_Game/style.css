@@ -1,0 +1,82 @@
+
+
+#newGame
+{
+    -fx-text-fill: darkblue;
+    -fx-background-color: darkgray;
+    -fx-font-weight: bold;
+    -fx-border-color: gold;
+    -fx-font-size:30;
+    
+    
+}
+
+#quit
+{
+    -fx-text-fill: darkblue;
+    -fx-background-color: darkgray;
+    -fx-font-weight: bold;
+    -fx-border-color: gold;
+    -fx-font-size:30;
+}
+
+#X
+{
+    -fx-padding: 0 0 0 0;
+    -fx-text-fill: whitesmoke;
+    -fx-background-color: black;
+    -fx-font-size: 55;
+    -fx-font-weight: bold;
+}
+
+#O
+{
+    -fx-padding: 0 0 0 0;
+    -fx-text-fill: white;
+    -fx-background-color: darkgreen;
+    -fx-font-size: 55;
+    -fx-font-weight: bold;
+}
+
+#top { -fx-background-color: #cdb980; }
+
+#root { -fx-background-color: wheat; }
+
+#winner
+{
+    -fx-background-color: lightskyblue;
+    -fx-font-weight: bold;
+}
+#Cont { -fx-background-color: wheat; }
+
+#easy
+{
+    -fx-text-fill: darkgreen;
+    -fx-background-color: darkgray;
+    -fx-font-weight: bold;
+    -fx-border-color: gold;
+    -fx-font-size:30;
+    
+    
+}
+
+
+
+#hard
+{
+    -fx-text-fill: darkgreen;
+    -fx-background-color: darkgray;
+    -fx-font-weight: bold;
+    -fx-border-color: gold;
+    -fx-font-size:30;
+}
+
+#label
+{
+    -fx-text-fill: darkred;
+    -fx-background-color: darkgray;
+    -fx-font-weight: bold;
+    -fx-border-color: gold;
+    -fx-font-size:30;
+    
+}
