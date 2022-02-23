@@ -174,12 +174,11 @@ public class ClientHandler {
                 window.show();
             } catch (IOException ex) {
                 System.out.println("Can't chaning the scene");
-                ex.printStackTrace();
             }
         });
     }
 
-    // Setters and getters for the scene here
+    // Setters and getters for the scene
     public static void setWindow(Stage stage) {
         window = stage;
     }
@@ -196,16 +195,16 @@ public class ClientHandler {
         return currentScene;
     }
 
-    // Setter and getter for the player here
-    public static void setPlayer(Player p) {
-        player = p;
+    // Setter and getter for the player
+    public static void setPlayer(Player person) {
+        player = person;
     }
 
     public static Player getPlayer() {
         return player;
     }
 
-    // setters and getters for multi scences according to the player
+    // setters and getters for the game scences according to the player
     public static void setLoginCtrl(LoginFXMLController ctrl) {
         loginctrl = ctrl;
     }
