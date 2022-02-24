@@ -53,7 +53,7 @@ public class ClientHandler {
     public static boolean connectToServer() {
         boolean res = true;
         try {
-            clientSocket = new Socket("127.0.0.1", 9090);
+            clientSocket = new Socket("127.0.0.1", 7771);
             ds = new DataInputStream(clientSocket.getInputStream());
             ps = new DataOutputStream(clientSocket.getOutputStream());
 
@@ -573,5 +573,123 @@ public class ClientHandler {
             });
         }
         isLoaded = false;
+    }
+
+    // Submitting player moves
+    public static void sendMoveRequest(int row, int col) {
+        JSONObject sendMoveRequest = new JSONObject();
+        sendMoveRequest.put("type", "sendMove");
+        sendMoveRequest.put("row", (Integer) row);
+        sendMoveRequest.put("col", (Integer) col);
+        ClientHandler.sendRequest(sendMoveRequest);
+    }
+
+    // Getting the move from the server and set it in multi game
+    private static void getMoveReponse(JSONObject response) {
+        int row = Integer.parseInt(response.get("row").toString());
+        int col = Integer.parseInt(response.get("col").toString());
+
+        Game.CellPosition move = new Game.CellPosition(row, col);
+        Game.setMoveOfNextPlayer(move);
+
+        Platform.runLater(() -> {
+            multigameCtrl.secondPlayerMove();
+        });
+    }
+
+    // Saving game moves to the server
+    public static void saveGameRequest(String nextMove) {
+        JSONObject saveGame = new JSONObject();
+        saveGame.put("type", "saveGame");
+        saveGame.put("nextMove", nextMove);
+        ClientHandler.sendRequest(saveGame);
+        Platform.runLater(() -> {
+            multigameCtrl.getSavingSubscene().setVisible(true);
+        });
+    }
+
+    private static void saveGameResponse(JSONObject response) {
+        String resStatus = response.get("responseStatus").toString();
+        if (resStatus.equals("true")) {
+            Platform.runLater(() -> {
+                multigameCtrl.getSavingSubscene().setVisible(true);
+                multigameCtrl.getSavingLbl().setText("Game saved successfully");
+                multigameCtrl.getHomtBtn().setDisable(false);
+            });
+        }
+    }
+
+    // Chat request handler
+    public static void sendChatRequest(String msg) {
+        JSONObject sendChat = new JSONObject();
+        sendChat.put("type", "sendChat");
+        sendChat.put("msg", msg);
+        ClientHandler.sendRequest(sendChat);
+    }
+
+    private static void sendChatResponse(JSONObject response) {
+        multigameCtrl.displayOpponentMsg(response.get("msg").toString());
+    }
+
+    // Load request handler
+    public static void loadGameRequest(String invitedPlayerUsername, Long gameId) {
+        JSONObject loadGameReq = new JSONObject();
+        loadGameReq.put("type", "invitePlayer");
+        loadGameReq.put("username", invitedPlayerUsername);
+        loadGameReq.put("newGame", false);
+        loadGameReq.put("gameId", gameId);
+        sendRequest(loadGameReq);
+    }
+
+    private static void loadGameResponse(JSONObject response) {
+        String resStatus = response.get("responseStatus").toString();
+        JSONParser parser = new JSONParser();
+        if (resStatus.equals("true")) {
+            JSONArray board = (JSONArray) response.get("gameboard");
+            nextMove = response.get("nextMove").toString().charAt(0);
+
+            String xPlayer = response.get("xPlayer").toString();
+            String oPlayer = response.get("oPlayer").toString();
+            char[] board1D = new char[9];
+            if (nextMove == 'X') {
+                nextPlayer = xPlayer;
+            } else if (nextMove == 'O') {
+                nextPlayer = oPlayer;
+            }
+            for (int i = 0; i < board.size(); i++) {
+                board1D[i] = board.get(i).toString().charAt(0);
+            }
+            gameBoard = Game.convertToTwoDimension(board1D);
+            isLoaded = true;
+            if (player.getInvited()) {
+                Platform.runLater(() -> {
+                    changeScene("Multigame");
+                });
+            } else {
+                Platform.runLater(() -> {
+                    changeScene("Multigame");
+                });
+            }
+        }
+    }
+
+    // Load list of saved game
+    private static void displayGamesList(JSONObject response) {
+        games = FXCollections.observableArrayList();
+        JSONParser parser = new JSONParser();
+        gamesFullInfo = (JSONArray) response.get("gamesList");
+        JSONObject game = new JSONObject();
+
+        for (int i = 0; i < gamesFullInfo.size(); i++) {
+            try {
+                game = (JSONObject) parser.parse(gamesFullInfo.get(i).toString());
+                games.add((i + 1) + ". [" + game.get("date").toString() + "] with " + game.get("player").toString());
+            } catch (ParseException ex) {
+                System.out.println("Can't fetch the game");
+            }
+        }
+        Platform.runLater(() -> {
+            loadgamectrl.displayGames(games);
+        });
     }
 }
