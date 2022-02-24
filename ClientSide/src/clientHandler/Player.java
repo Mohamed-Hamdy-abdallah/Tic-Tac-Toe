@@ -90,6 +90,12 @@ public class Player {
         } else {
             check = Pattern.matches("^[a-zA-Z1-9-_]*$", username);
         }
+        // else {
+        // check = Pattern.matches("^[A-Za-z][A-Za-z0-9_]{7,21}$", username);
+        // // User should start with an alphabet [A-Za-z], All other characters can be
+        // // alphabets.
+        // // User contains numbers or an underscore [A-Za-z0-9_].
+        // }
         return check;
     }
 
@@ -102,6 +108,12 @@ public class Player {
         if (password.length() < 6 || password.length() > 20) {
             check = false;
         }
+        // else {
+        // check = Pattern.matches("^(?=.*\\d).{4,8}$", password);
+        // // Password must be between 4 and 8 digits long and include at least one
+        // numeric
+        // // digit.
+        // }
         return check;
     }
 
