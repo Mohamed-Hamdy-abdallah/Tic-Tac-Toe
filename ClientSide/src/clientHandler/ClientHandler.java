@@ -297,7 +297,7 @@ public class ClientHandler {
         return clientDropped;
     }
 
-    // login handler
+    // login handler with errors handler
     private static void Login(JSONObject response) {
         String request = response.get("type").toString();
         String resStatus = response.get("responseStatus").toString();
@@ -317,7 +317,7 @@ public class ClientHandler {
             } else if (request.equals("signup") && error.equals("fail")) {
                 warning = "Username already exists, try anoter one";
             } else {
-                warning = "unexpected";
+                warning = "unexpected Error try again!!";
             }
             Platform.runLater(() -> {
                 loginctrl.getLabel().setText(warning);
@@ -373,11 +373,12 @@ public class ClientHandler {
                 break;
 
             default:
+                System.out.println("Player list not Error scene");
                 break;
         }
     }
 
-    // Invitation handler
+    // Creating invite object
     public static void invitePlayerRequest(String invitedPlayerUsername) {
         JSONObject inviteRequest = new JSONObject();
         inviteRequest.put("type", "invitePlayer");
@@ -386,6 +387,7 @@ public class ClientHandler {
         ClientHandler.sendRequest(inviteRequest);
     }
 
+    // Handling invition response according if the oppenont is not available
     private static void invitePlayerResponse(JSONObject response) {
         String resStatus = response.get("responseStatus").toString();
 
@@ -393,20 +395,20 @@ public class ClientHandler {
             if (currentScene.equals("Multigame")) {
                 gameAccepted = false;
                 Platform.runLater(() -> {
-                    multigameCtrl.getWaitingLbl().setText(player.getOpponent() + " is not available.");
+                    multigameCtrl.getWaitingLbl().setText(player.getOpponent() + " is not available");
                     multigameCtrl.getOkBtn().setDisable(false);
                 });
             } else if (currentScene.equals("Loadgame")) {
                 Platform.runLater(() -> {
-                    loadgamectrl.getRejectionLabel().setText("Player is not available.");
+                    loadgamectrl.getRejectionLabel().setText("Player is not currently available");
                     loadgamectrl.requestRejectionHandler();
                 });
             }
         }
     }
 
+    // Handling the invitation game scenarios
     private static void getInvitationResponse(JSONObject response) {
-
         String resStatus = response.get("responseStatus").toString();
         String inviteStatus = response.get("invitationStatus").toString();
         String username = response.get("username").toString();
@@ -419,5 +421,157 @@ public class ClientHandler {
                 replayGameInviteHandler(username, inviteStatus);
             }
         }
+    }
+
+    // New game invitation handler when accepted or not accepted
+    private static void newGameInviteHandler(String username, String inviteStatus) {
+        if (inviteStatus.equals("true")) {
+            player.setInvited(false);
+            player.setOpponent(username);
+            gameAccepted = true;
+            if (replay) {
+                Platform.runLater(() -> {
+                    multigameCtrl.getWaitingLbl().setText(username + " accepted your invitation, The game will start");
+                });
+            } else {
+                Platform.runLater(() -> {
+                    Invitectrl.getWaitingLbl().setText(username + " accepted your invitation, the game will start");
+                });
+            }
+        } else {
+            gameAccepted = false;
+            if (replay) {
+                Platform.runLater(() -> {
+                    multigameCtrl.getWaitingLbl().setText(username + " didn't accepet your invitation");
+                    multigameCtrl.getOkBtn().setDisable(false);
+                });
+            } else {
+                Platform.runLater(() -> {
+                    Invitectrl.getWaitingLbl().setText(username + " didn't accepet your invitation");
+                    Invitectrl.getOkBtn().setDisable(false);
+                });
+            }
+        }
+    }
+
+    // Replay game handler
+    private static void replayGameInviteHandler(String username, String inviteStatus) {
+        if (inviteStatus.equals("false")) {
+            Platform.runLater(() -> {
+                loadgamectrl.getRejectionLabel().setText("Player didn't accepet your request");
+                loadgamectrl.requestRejectionHandler();
+            });
+        } else if (inviteStatus.equals("true")) {
+            player.setOpponent(username);
+        }
+    }
+
+    // Invitation request
+    private static void invitationRequest(JSONObject request) {
+        String username = request.get("username").toString();
+        String newGame = request.get("newGame").toString();
+        invitingUsername = username;
+        ClientHandler.changeScene("Invitation");
+        Platform.runLater(() -> {
+            if (newGame.equals("false")) {
+                String date = request.get("date").toString();
+                invitationCtrl.getInvitationLabel().setText("Player " + username
+                        + " is inviting you to play an old game.\n Date: [" + date + "]\n Do you accept?");
+            } else {
+                invitationCtrl.getInvitationLabel()
+                        .setText("Player " + username + " is inviting you to a new game.\n Do you accept?");
+            }
+        });
+    }
+
+    // Setting opponent when invitation accepted
+    public static void invitationResponse(String response) {
+        JSONObject inviteResponse = new JSONObject();
+        inviteResponse.put("type", "invitation");
+        inviteResponse.put("invitationStatus", response);
+        ClientHandler.sendRequest(inviteResponse);
+        if ("true".equals(response)) {
+            player.setOpponent(invitingUsername);
+        }
+    }
+
+    // Game starting handler
+    private static void GameStartedResponse(JSONObject response) {
+        String resStatus = response.get("responseStatus").toString();
+        if (resStatus.equals("true")) {
+
+            if (replay) {
+                if (player.getInvited()) {
+                    Platform.runLater(() -> {
+                        invitationCtrl.getWaitingLbl().setText("Start Playing");
+                        invitationCtrl.getStartBtn().setDisable(false);
+                    });
+                    changeScene("Multigame");
+
+                } else {
+                    Platform.runLater(() -> {
+                        multigameCtrl.getWaitingLbl().setText("Start Playing");
+                        multigameCtrl.getOkBtn().setDisable(false);
+                    });
+                }
+            } else {
+                if (player.getInvited()) {
+                    Platform.runLater(() -> {
+                        invitationCtrl.getWaitingLbl().setText("Start Playing");
+                        invitationCtrl.getStartBtn().setDisable(false);
+                    });
+                } else {
+                    Platform.runLater(() -> {
+                        Invitectrl.getWaitingLbl().setText("Start Playing");
+                        Invitectrl.getOkBtn().setDisable(false);
+                    });
+
+                }
+                changeScene("Multigame");
+            }
+        }
+    }
+
+    // Game endeing handler
+    public static void gameEndedRequest(String winner, boolean isDraw, String errorMsg) {
+        JSONObject gameEnded = new JSONObject();
+        gameEnded.put("type", "gameEnded");
+        gameEnded.put("responseStatus", "true");
+        gameEnded.put("username", winner);
+        gameEnded.put("isDraw", isDraw);
+        gameEnded.put("errorMsg", errorMsg);
+        ClientHandler.sendRequest(gameEnded);
+
+        isLoaded = false;
+    }
+
+    // Game quit scenario response
+    private static void gameQuitResponse(JSONObject response) {
+        String resStatus = response.get("responseStatus").toString();
+        if (resStatus.equals("true")) {
+            gameAccepted = false;
+            Platform.runLater(() -> {
+                multigameCtrl.getWaitingSubscene().setVisible(true);
+                multigameCtrl.getOkBtn().setDisable(false);
+
+                multigameCtrl.getWaitingLbl().setText("Client connection dropped");
+            });
+        }
+    }
+
+    // Updating the score through the server to the database of that player
+    private static void gameEndedResponse(JSONObject response) {
+        String errormsg = response.get("errorMsg").toString();
+        if (errormsg.equals("")) {
+            String newScore = response.get("score").toString();
+            player.setScore(Integer.parseInt(newScore));
+        } else if (errormsg.equals("clientDropped")) {
+            gameAccepted = false;
+            Platform.runLater(() -> {
+                multigameCtrl.getWaitingSubscene().setVisible(true);
+                multigameCtrl.getWaitingLbl().setText("Client connection dropped");
+            });
+        }
+        isLoaded = false;
     }
 }
