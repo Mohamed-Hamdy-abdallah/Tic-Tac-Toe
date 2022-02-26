@@ -8,7 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
     <jar href="ServerSide.jar" size="53011" download="eager" />
+=======
+    <jar href="ServerSide.jar" size="53009" download="eager" />
+>>>>>>> d540535d0e259d9a61a13a98635d753f745d7bd5
     <jar href="lib\json-simple-1.1.1.jar" size="23737" download="eager" />
     <jar href="lib\mysql-connector-java-8.0.22.jar" size="2389216" download="eager" />
   </resources>
