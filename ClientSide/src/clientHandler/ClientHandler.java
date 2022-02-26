@@ -133,9 +133,6 @@ public class ClientHandler {
                 case "gameStarted":
                     GameStartedResponse(jsonMsg);
                     break;
-                case "sendChat":
-                    sendChatResponse(jsonMsg);
-                    break;
                 case "gameEnded":
                     gameEndedResponse(jsonMsg);
                     break;
@@ -619,18 +616,6 @@ public class ClientHandler {
         }
     }
 
-    // Chat request handler
-    public static void sendChatRequest(String msg) {
-        JSONObject sendChat = new JSONObject();
-        sendChat.put("type", "sendChat");
-        sendChat.put("msg", msg);
-        ClientHandler.sendRequest(sendChat);
-    }
-
-    private static void sendChatResponse(JSONObject response) {
-        multigameCtrl.displayOpponentMsg(response.get("msg").toString());
-    }
-
     // Load request handler
     public static void loadGameRequest(String invitedPlayerUsername, Long gameId) {
         JSONObject loadGameReq = new JSONObject();
@@ -641,6 +626,7 @@ public class ClientHandler {
         sendRequest(loadGameReq);
     }
 
+    // Loading the save game with X O postions
     private static void loadGameResponse(JSONObject response) {
         String resStatus = response.get("responseStatus").toString();
         JSONParser parser = new JSONParser();
