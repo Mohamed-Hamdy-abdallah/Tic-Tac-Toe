@@ -287,17 +287,17 @@ public class MultigameFXMLController implements Initializable {
 //        ClientHandler.changeScene("Start");//should be the scene for starting a game
 //    }
 //    
-//    @FXML
-//    private void saveBtnHandler(ActionEvent event){
-//        String nextMove = " ";
-//        if(game.getNextMove() == 0){
-//            nextMove = "X";
-//        }
-//        else if(game.getNextMove() == 1){
-//            nextMove = "O";
-//        }
-//        ClientHandler.saveGameRequest(nextMove);
-//    }
+   @FXML
+    private void saveBtnHandler(ActionEvent event){
+        String nextMove = " ";
+        if(game.getNextMove() == 0){
+            nextMove = "X";
+        }
+        else if(game.getNextMove() == 1){
+            nextMove = "O";
+        }
+        ClientHandler.saveGameRequest(nextMove);
+    }
     
     private void clearCells(){
         cell1.setText("");

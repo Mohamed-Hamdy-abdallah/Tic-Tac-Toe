@@ -21,7 +21,14 @@
             <Font name="Tw Cen MT Condensed Extra Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="exitbtn" layoutX="90.0" layoutY="347.0" mnemonicParsing="false" onMouseReleased="#exitHandler" prefHeight="41.0" prefWidth="142.0" style="-fx-background-color: #363e48;" text="Exit" textFill="WHITE">
+      
+      <Button fx:id="loadbtn" layoutX="90.0" layoutY="349.0" mnemonicParsing="false" onMouseReleased="#loadgameHandler" prefHeight="41.0" prefWidth="142.0" style="-fx-background-color: #363e48;" text="Load Game" textFill="WHITE">
+         <font>
+            <Font name="Tw Cen MT Condensed Extra Bold" size="20.0" />
+         </font>
+      </Button>
+      
+      <Button fx:id="exitbtn" layoutX="90.0" layoutY="408.0" mnemonicParsing="false" onMouseReleased="#exitHandler" prefHeight="41.0" prefWidth="142.0" style="-fx-background-color: #363e48;" text="Exit" textFill="WHITE">
          <font>
             <Font name="Tw Cen MT Condensed Extra Bold" size="20.0" />
          </font>
