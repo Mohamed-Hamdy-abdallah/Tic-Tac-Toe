@@ -2,10 +2,10 @@
 
 #newGame
 {
-    -fx-text-fill: darkblue;
-    -fx-background-color: darkgray;
+    -fx-text-fill: #aad2d8;
+    -fx-background-color: #306169;
     -fx-font-weight: bold;
-    -fx-border-color: gold;
+    -fx-border-color: #204146;
     -fx-font-size:30;
     
     
@@ -13,10 +13,10 @@
 
 #quit
 {
-    -fx-text-fill: darkblue;
-    -fx-background-color: darkgray;
+    -fx-text-fill: #aad2d8;
+    -fx-background-color: #306169;
     -fx-font-weight: bold;
-    -fx-border-color: gold;
+    -fx-border-color: #204146;
     -fx-font-size:30;
 }
 
@@ -38,23 +38,23 @@
     -fx-font-weight: bold;
 }
 
-#top { -fx-background-color: #cdb980; }
+#top { -fx-background-color: #50a2af; }
 
-#root { -fx-background-color: wheat; }
+#root { -fx-background-color: #aad2d8; }
 
 #winner
 {
     -fx-background-color: lightskyblue;
     -fx-font-weight: bold;
 }
-#Cont { -fx-background-color: wheat; }
+#Cont { -fx-background-color:  #aad2d8; }
 
 #easy
 {
-    -fx-text-fill: darkgreen;
-    -fx-background-color: darkgray;
+    -fx-text-fill: #aad2d8;
+    -fx-background-color: #306169;
     -fx-font-weight: bold;
-    -fx-border-color: gold;
+    -fx-border-color: #204146;
     -fx-font-size:30;
     
     
@@ -64,19 +64,22 @@
 
 #hard
 {
-    -fx-text-fill: darkgreen;
-    -fx-background-color: darkgray;
+    
+    -fx-text-fill: #aad2d8;
+    -fx-background-color: #306169;
     -fx-font-weight: bold;
-    -fx-border-color: gold;
+    -fx-border-color: #204146;
     -fx-font-size:30;
+    
+   
 }
 
 #label
 {
     -fx-text-fill: darkred;
-    -fx-background-color: darkgray;
+/*    -fx-background-color: #306169;*/
     -fx-font-weight: bold;
-    -fx-border-color: gold;
+/*    -fx-border-color: #204146;*/
     -fx-font-size:30;
     
 }
