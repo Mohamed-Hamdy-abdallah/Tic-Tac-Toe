@@ -1,7 +1,6 @@
 /*
     This is the main GUI application class for the server.
  */
-
 package server.serverfx;
 
 import database.DBMethods;
@@ -16,40 +15,36 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class ServerSide extends Application {
-     
+
     public static FXMLDocumentBase rootOrigin;
-    public static final int refreshRate = 3 ;
-    public static boolean DBStatusFlag = false ;
-    
+    public static final int refreshRate = 3;
+    public static boolean DBStatusFlag = false;
+
     @Override
     public void start(Stage stage) throws Exception {
-        
-        if( DBMethods.checkDBConnection()){            
-            DBStatusFlag = true ;
-        }else{
-            DBStatusFlag= false ;
+
+        if (DBMethods.checkDBConnection()) {
+            DBStatusFlag = true;
+        } else {
+            DBStatusFlag = false;
         }
-        
-        Parent root  = new FXMLDocumentBase();
-        
-        rootOrigin = (FXMLDocumentBase) root ;
-        
-       
-        
+
+        Parent root = new FXMLDocumentBase();
+
+        rootOrigin = (FXMLDocumentBase) root;
+
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), (ActionEvent actionEvent) -> {
-            if( DBStatusFlag ){
-                rootOrigin.clientChartHandler();
-                rootOrigin.logViewHandler();
+            if (DBStatusFlag) {
+//                rootOrigin.clientChartHandler();
+//                rootOrigin.logViewHandler();
                 rootOrigin.tableViewHandler();
             }
 
-            rootOrigin.dbViewHandler();
-
+//            rootOrigin.dbViewHandler();
         }), new KeyFrame(Duration.seconds(refreshRate)));
 
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-        
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -57,13 +52,13 @@ public class ServerSide extends Application {
         stage.resizableProperty().setValue(false);
         stage.show();
     }
-    
+
     @Override
-    public void stop(){
+    public void stop() {
 
         //stop the server object
         rootOrigin.serverInGUI.stop();
-        
+
         System.exit(0);   // exit plateform.exit()
     }
 

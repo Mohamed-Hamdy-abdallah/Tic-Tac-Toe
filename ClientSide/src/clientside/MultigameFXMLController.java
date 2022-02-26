@@ -153,7 +153,7 @@ public class MultigameFXMLController implements Initializable {
             setSceneVisibility(true);
 
         }
-        game.printBoard();
+        //game.printBoard();
     }
     
     @FXML
@@ -466,7 +466,7 @@ public class MultigameFXMLController implements Initializable {
         }
 
         game.setBoard(ClientHandler.getBoard());
-        game.printBoard();
+        //game.printBoard();
     }
     
     private void setLoadedBoard(){

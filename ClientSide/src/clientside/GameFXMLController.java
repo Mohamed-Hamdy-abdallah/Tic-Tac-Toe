@@ -92,7 +92,7 @@ public class GameFXMLController implements Initializable {
             winnerLabel.setText("It's a draw!");
             setSceneVisibility(true);
         }
-        game.printBoard();
+        //game.printBoard();
     }
     
     @FXML

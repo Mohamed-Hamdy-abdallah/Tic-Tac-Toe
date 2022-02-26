@@ -1,2 +1,4 @@
 /ClientSide/dist/
 /ClientSide/nbproject/private/
+/ServerSide/build/
+/ClientSide/build/
