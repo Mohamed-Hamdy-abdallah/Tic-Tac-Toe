@@ -5,6 +5,7 @@
 package server.utils;
 
 
+
 public class Errors {
     
     public static final String INVALID = "invalid";
