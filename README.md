@@ -18,7 +18,9 @@ Tic-tac-toe is played on a three-by-three grid by two players, who alternately p
 
 In the following example, the first player (X) wins the game in seven steps:
 
-![Xwins](https://upload.wikimedia.org/wikipedia/commons/1/1b/Tic-tac-toe-game-1.svg)
+<p align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Tic-tac-toe-game-1.svg"/>
+</p>
 
 ---
 
