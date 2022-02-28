@@ -77,4 +77,4 @@ To start the full project:
 - **[Ahmed Mohamed](https://github.com/ahmedshokry426)**
 
 <p align="center">
-<img src="https://media.giphy.com/media/mvyyH8p7uez7z6pwyX/giphy.gif" height = "200px" width = "200px"/></p>
+<img src="https://media.giphy.com/media/mvyyH8p7uez7z6pwyX/giphy.gif" height = "200px" width = "300px"/></p>
