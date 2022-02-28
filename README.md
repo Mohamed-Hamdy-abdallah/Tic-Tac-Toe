@@ -50,10 +50,12 @@ or download the zipped file and unzip it in your working directory.
 
 To start the full project:
 
-- Import the database to DB system you like, the DB file is as follow
-````diff
-+ /Serverside/Database Schema/Database.sql .
-````
+- Import the database to DB system you like, the DB file in as follows
+
+```diff
+ /Serverside/Database Schema/Database.sql
+```
+
 - Run the Server side first, and press start to launch it.
 - Now you can run the client side and enjoy the game.
 
