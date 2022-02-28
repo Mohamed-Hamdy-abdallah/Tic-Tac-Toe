@@ -50,7 +50,7 @@ or download the zipped file and unzip it in your working directory.
 
 To start the full project:
 
-- Import the database to DB system you like, the DB file in as follows
+- Import the database to DB system you like, the directory of the DB file as follows
 
 ```diff
 + /Serverside/Database Schema/Database.sql
