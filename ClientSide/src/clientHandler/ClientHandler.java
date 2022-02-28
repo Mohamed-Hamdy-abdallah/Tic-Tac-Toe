@@ -556,7 +556,7 @@ public class ClientHandler {
         }
     }
 
-    // Updating the score through the server to the database of that player
+    // Updating the score through the server to the database of this player
     private static void gameEndedResponse(JSONObject response) {
         String errormsg = response.get("errorMsg").toString();
         if (errormsg.equals("")) {
