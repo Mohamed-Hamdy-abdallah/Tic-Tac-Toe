@@ -53,7 +53,7 @@ To start the full project:
 - Import the database to DB system you like, the DB file in as follows
 
 ```diff
-/Serverside/Database Schema/Database.sql
++ /Serverside/Database Schema/Database.sql
 ```
 
 - Run the Server side first, and press start to launch it.
