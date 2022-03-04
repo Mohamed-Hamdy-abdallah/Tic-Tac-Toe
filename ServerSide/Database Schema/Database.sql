@@ -41,9 +41,8 @@ INSERT INTO `players` (`pid`, `username`, `passwd`, `email`, `status`, `score`, 
 (1, 'user1', '123456789', NULL, 'offline', 30, NULL),
 (2, 'user2', '123456789', NULL, 'offline', 300, NULL),
 (3, 'user3', '123456789', NULL, 'offline', 0, NULL),
-(5, 'userpass', '$2a$10$j2d3Vzab4uK.3uzqfABrgOeh9og.qwiKaUSUa.IBEhb/SGtoEB4v6', NULL, 'offline', 0, NULL),
-(6, 'ahmed', '123456789', 'null', 'offline', 0, NULL),
-(7, 'ali', '123456789', 'null', 'offline', 0, NULL);
+(4, 'ahmed', '123456789', 'null', 'offline', 0, NULL),
+(5, 'ali', '123456789', 'null', 'offline', 0, NULL);
 
 ALTER TABLE `games`
   ADD CONSTRAINT `games_ibfk_1` FOREIGN KEY (`player1`) REFERENCES `players` (`pid`) ON DELETE CASCADE ON UPDATE CASCADE,
