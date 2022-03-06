@@ -57,7 +57,16 @@ To start the full project:
 ```
 
 - Run the Server side first, and press start to launch it.
+
+```diff
++ /Serverside/src/server/serverfx/ServerSide.java
+```
+
 - Now you can run the client side and enjoy the game.
+
+```diff
++ /ClientSide/src/clientside/ClientSide.java
+```
 
 ---
 
