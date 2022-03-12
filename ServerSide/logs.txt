@@ -1,1 +1,14 @@
-[ Sun Feb 27 22:24:58 EET 2022 ] :  Server is Stopped
+[ Sun Mar 06 13:28:21 EET 2022 ] :  Server is Running
+[ Sun Mar 06 13:31:49 EET 2022 ] :  [AuthenHandler class]: A Client has just signed in
+[ Sun Mar 06 13:31:57 EET 2022 ] :  [AuthenHandler class]: A Client has just signed in
+[ Sun Mar 06 13:41:02 EET 2022 ] :  [PlayerHandler class]: Player has dropped connections
+[ Sun Mar 06 13:41:08 EET 2022 ] :  [PlayerHandler class]: Player has dropped connections
+[ Sun Mar 06 13:41:26 EET 2022 ] :  [AuthenHandler class]: A Client has just signed in
+[ Sun Mar 06 13:41:32 EET 2022 ] :  [AuthenHandler class]: A Client has just signed in
+[ Sun Mar 06 13:41:40 EET 2022 ] :  [PlayerHandler class]: Player Request [ invitePlayer] has succeeded
+[ Sun Mar 06 13:41:41 EET 2022 ] :  [GameEstablishHandler class]: Game Invitation Accepted [ ali] vs [ ahmed ]
+[ Sun Mar 06 13:42:25 EET 2022 ] :  [PlayerHandler class]: Player Request [ getGames] has succeeded
+[ Sun Mar 06 13:42:49 EET 2022 ] :  [PlayerHandler class]: Player Request [ invitePlayer] has succeeded
+[ Sun Mar 06 13:42:51 EET 2022 ] :  [GameEstablishHandler class]: Game Invitation Accepted [ ali] vs [ ahmed ]
+[ Sun Mar 06 13:54:00 EET 2022 ] :  [PlayerHandler class]: Player [ ahmed ] has loggedout
+[ Sun Mar 06 13:54:01 EET 2022 ] :  [PlayerHandler class]: Player [ ali ] has loggedout
